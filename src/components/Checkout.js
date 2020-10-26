@@ -10,13 +10,13 @@ import CustomerDetailsForm from './CustomerDetailsForm';
 import PaymentForm from './PaymentForm';
 import Footer from './Footer';
 
-const Checkout = ({ 
-  customerDetails, 
-  checkoutTotal, 
-  order, 
-  orderTotal, 
-  updateCustomerDetails, 
-  loadSampleCustomer 
+const Checkout = ({
+  customerDetails,
+  checkoutTotal,
+  order,
+  orderTotal,
+  updateCustomerDetails,
+  loadSampleCustomer
 }) => {
 
   const [state, setState] = useState({
@@ -45,7 +45,7 @@ const Checkout = ({
     setState(prevState => ({ ...prevState, customerForm: true }));
     if (state.customerForm || state.paymentForm) {
       try {
-        const result = await fetch('/order', {
+        const result = await fetch(`https://add-cart.herokuapp.com/order`, {
           method: "Post",
           headers: {
             'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ const Checkout = ({
         })
         const resp = await result.json();
         console.warn(resp);
-        alert('Order Place Successfully');
+        alert('Order Placed Successfully! We\'ll be there in 30 mins!');
         setState(prevState => ({ ...prevState, completedForm: true }));
       } catch (err) {
         console.log(err);
