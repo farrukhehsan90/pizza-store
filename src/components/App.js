@@ -121,43 +121,43 @@ const App = () => {
 
   return (
     <BrowserRouter>
-        <Switch>
-          <Route exact path='/' render={(props) =>
-            <Menu {...props}
+      <Switch>
+        <Route exact path='/' render={(props) =>
+          <Menu {...props}
+            orderTotal={state.orderTotal}
+            addToOrder={addToOrder}
+            order={state.order} />} />
+        <Route exact path='/menu' render={(props) =>
+          <Menu {...props}
+            orderTotal={state.orderTotal}
+            addToOrder={addToOrder}
+            order={state.order} />} />
+        <Route exact path='/cart' render={(props) =>
+          <Cart {...props}
+            orderTotal={state.orderTotal}
+            addToOrder={addToOrder}
+            removeFromOrder={removeFromOrder}
+            order={state.order}
+            updateCheckoutTotal={updateCheckoutTotal} />} />
+        <Route exact path='/checkout' render={(props) =>
+          <StripeProvider apiKey='pk_test_12345'>
+            <Checkout {...props}
               orderTotal={state.orderTotal}
-              addToOrder={addToOrder}
-              order={state.order} />} />
-          <Route exact path='/menu' render={(props) =>
-            <Menu {...props}
-              orderTotal={state.orderTotal}
-              addToOrder={addToOrder}
-              order={state.order} />} />
-          <Route exact path='/cart' render={(props) =>
-            <Cart {...props}
-              orderTotal={state.orderTotal}
-              addToOrder={addToOrder}
-              removeFromOrder={removeFromOrder}
-              order={state.order}
-              updateCheckoutTotal={updateCheckoutTotal} />} />
-          <Route exact path='/checkout' render={(props) =>
-            <StripeProvider apiKey='pk_test_12345'>
-              <Checkout {...props}
-                orderTotal={state.orderTotal}
-                customerDetails={state.customer}
-                checkoutTotal={state.checkoutTotal}
-                order={state.order}
-                updateCustomerDetails={updateCustomerDetails}
-                loadSampleCustomer={loadSampleCustomer} />
-            </StripeProvider>}
-          />
-          <Route exact path='/confirmed' render={(props) =>
-            <Confirmation {...props}
               customerDetails={state.customer}
-              clearState={clearState}
-            />
-          }
+              checkoutTotal={state.checkoutTotal}
+              order={state.order}
+              updateCustomerDetails={updateCustomerDetails}
+              loadSampleCustomer={loadSampleCustomer} />
+          </StripeProvider>}
+        />
+        <Route exact path='/confirmed' render={(props) =>
+          <Confirmation {...props}
+            customerDetails={state.customer}
+            clearState={clearState}
           />
-        </Switch>
+        }
+        />
+      </Switch>
     </BrowserRouter>
   );
 }
